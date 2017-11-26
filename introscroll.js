@@ -1,60 +1,3 @@
-const getElement = selector => document.querySelector(selector);
-
-const swipe = selector => {
-  let touchstartX = 0;
-  let touchstartY = 0;
-  let touchendX = 0;
-  let touchendY = 0;
-
-  const onSwipeUp = new Event('onswipeup');
-  const onSwipeRight = new Event('onswiperight');
-  const onSwipeDown = new Event('onswipedown');
-  const onSwipeLeft = new Event('onswipeleft');
-  const onTap = new Event('tap');
-
-  element.addEventListener(
-    'touchstart',
-    event => {
-      touchstartX = event.changedTouches[0].screenX;
-      touchstartY = event.changedTouches[0].screenY;
-    },
-    false
-  );
-
-  element.addEventListener(
-    'touchend',
-    event => {
-      touchendX = event.changedTouches[0].screenX;
-      touchendY = event.changedTouches[0].screenY;
-
-      handleTouch();
-    },
-    false
-  );
-
-  const handleTouch = () => {
-    if (touchendX < touchstartX) {
-      element.dispatchEvent(onSwipeLeft);
-    }
-
-    if (touchendX > touchstartX) {
-      element.dispatchEvent(onSwipeRight);
-    }
-
-    if (touchendY < touchstartY) {
-      element.dispatchEvent(onSwipeUp);
-    }
-
-    if (touchendY > touchstartY) {
-      element.dispatchEvent(onSwipeDown);
-    }
-
-    if (touchendY === touchstartY) {
-      element.dispatchEvent(onTap);
-    }
-  };
-};
-
 export default class IntroScroll {
   constructor(settings) {
     this.settings = Object.assign(
@@ -72,10 +15,10 @@ export default class IntroScroll {
     );
     this.win = window;
     this.doc = document;
-    this.element = getElement(settings.element);
-    this.wrapper = getElement(settings.wrapper);
-    this.container = getElement(settings.container);
-    this.trigger = getElement(settings.trigger);
+    this.element = this.getElement(settings.element);
+    this.wrapper = this.getElement(settings.wrapper);
+    this.container = this.getElement(settings.container);
+    this.trigger = this.getElement(settings.trigger);
     this.scrollClass = settings.scrollClass;
     this.duration = settings.duration;
     this.afterScroll = settings.afterScroll;
@@ -88,6 +31,65 @@ export default class IntroScroll {
     this.bind();
   }
 
+  getElement(selector) {
+    return this.doc.querySelector(selector);
+  }
+
+  swipe(element) {
+    let touchstartX = 0;
+    let touchstartY = 0;
+    let touchendX = 0;
+    let touchendY = 0;
+
+    const onSwipeUp = new Event('onswipeup');
+    const onSwipeRight = new Event('onswiperight');
+    const onSwipeDown = new Event('onswipedown');
+    const onSwipeLeft = new Event('onswipeleft');
+    const onTap = new Event('tap');
+
+    element.addEventListener(
+      'touchstart',
+      event => {
+        touchstartX = event.changedTouches[0].screenX;
+        touchstartY = event.changedTouches[0].screenY;
+      },
+      false
+    );
+
+    element.addEventListener(
+      'touchend',
+      event => {
+        touchendX = event.changedTouches[0].screenX;
+        touchendY = event.changedTouches[0].screenY;
+
+        handleTouch();
+      },
+      false
+    );
+
+    const handleTouch = () => {
+      if (touchendX < touchstartX) {
+        element.dispatchEvent(onSwipeLeft);
+      }
+
+      if (touchendX > touchstartX) {
+        element.dispatchEvent(onSwipeRight);
+      }
+
+      if (touchendY < touchstartY) {
+        element.dispatchEvent(onSwipeUp);
+      }
+
+      if (touchendY > touchstartY) {
+        element.dispatchEvent(onSwipeDown);
+      }
+
+      if (touchendY === touchstartY) {
+        element.dispatchEvent(onTap);
+      }
+    };
+  }
+
   bind() {
     const win = this.win;
     const trigger = this.trigger;
@@ -95,8 +97,8 @@ export default class IntroScroll {
     const wrapper = this.wrapper;
     const container = this.container;
 
-    swipe(element);
-    swipe(wrapper);
+    this.swipe(element);
+    this.swipe(wrapper);
 
     element.addEventListener(
       'mousewheel',
