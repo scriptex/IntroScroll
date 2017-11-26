@@ -46,4 +46,4 @@ const intro = new IntroScroll({
 });
 ```
 
-For more details please see the demo.
+For more details please see the [demo](./demo/).

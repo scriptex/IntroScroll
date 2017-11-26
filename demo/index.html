@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  
+  <title>IntroScroll Demo</title>
+
+  <style type="text/css" media="screen">
+    html,
+    body { height: 100%; }
+
+    body { font-family: sans-serif; margin: 0; overflow: hidden; }
+
+    .intro,
+    .wrapper,
+    .section,
+    .container { height: 100%; }
+
+    .intro,
+    .section { display: flex; align-items: center; justify-content: center; }
+
+    .intro { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 99; transform: translateY(0%) scale(1); transition: transform 1.5s ease-in-out; background-color: #fff; }
+    .intro__link { position: absolute; bottom: 1em; left: 50%; transform: translateX(-50%); }
+
+    .is-scrolled .intro { transform: translateY(-100%) scale(0.8); }
+  </style>
+</head>
+<body>
+  <div class="wrapper" id="wrapper">
+    <div class="intro" id="intro">
+      <div class="intro-inner">INTRO</div>
+
+      <a href="#" class="intro__link" id="intro__link">Scroll Down</a>
+    </div>
+
+    <div class="container" id="container">
+      <section class="section" style="background-color: gray">Gray Section</section><!-- /.section -->
+      
+      <section class="section" style="background-color: lime">Lime Section</section><!-- /.section -->
+      
+      <section class="section" style="background-color: lavender">Lavender Section</section><!-- /.section -->
+    </div>
+  </div>
+
+  <script>
+    class IntroScroll {
+      constructor(settings = {}) {
+        this.settings = Object.assign(
+          {},
+          {
+            element: '#intro',
+            wrapper: '#wrapper',
+            container: '#container',
+            trigger: '#intro__link',
+            scrollClass: 'is-scrolled',
+            duration: 1500,
+            afterScroll: null
+          },
+          settings
+        );
+        this.win = window;
+        this.doc = document;
+        this.element = this.getElement(this.settings.element);
+        this.wrapper = this.getElement(this.settings.wrapper);
+        this.container = this.getElement(this.settings.container);
+        this.trigger = this.getElement(this.settings.trigger);
+        this.scrollClass = this.settings.scrollClass;
+        this.duration = this.settings.duration;
+        this.afterScroll = this.settings.afterScroll;
+        this.isScrolling = false;
+
+        this.init();
+      }
+
+      init() {
+        this.bind();
+      }
+
+      getElement(selector) {
+        return this.doc.querySelector(selector);
+      }
+
+      swipe(element) {
+        let touchstartX = 0;
+        let touchstartY = 0;
+        let touchendX = 0;
+        let touchendY = 0;
+
+        const onSwipeUp = new Event('onswipeup');
+        const onSwipeRight = new Event('onswiperight');
+        const onSwipeDown = new Event('onswipedown');
+        const onSwipeLeft = new Event('onswipeleft');
+        const onTap = new Event('tap');
+
+        element.addEventListener(
+          'touchstart',
+          event => {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+          },
+          false
+        );
+
+        element.addEventListener(
+          'touchend',
+          event => {
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+
+            handleTouch();
+          },
+          false
+        );
+
+        const handleTouch = () => {
+          if (touchendX < touchstartX) {
+            element.dispatchEvent(onSwipeLeft);
+          }
+
+          if (touchendX > touchstartX) {
+            element.dispatchEvent(onSwipeRight);
+          }
+
+          if (touchendY < touchstartY) {
+            element.dispatchEvent(onSwipeUp);
+          }
+
+          if (touchendY > touchstartY) {
+            element.dispatchEvent(onSwipeDown);
+          }
+
+          if (touchendY === touchstartY) {
+            element.dispatchEvent(onTap);
+          }
+        };
+      }
+
+      bind() {
+        const win = this.win;
+        const trigger = this.trigger;
+        const element = this.element;
+        const wrapper = this.wrapper;
+        const container = this.container;
+
+        this.swipe(element);
+        this.swipe(wrapper);
+
+        element.addEventListener(
+          'mousewheel',
+          event => {
+            if (event.deltaY > 0) {
+              this.enableScroll();
+            }
+          },
+          false
+        );
+
+        element.addEventListener(
+          'onswipeup',
+          event => {
+            this.enableScroll();
+          },
+          false
+        );
+
+        wrapper.addEventListener(
+          'onswipedown',
+          event => {
+            if (this.win.pageYOffset <= 0) {
+              this.disableScroll();
+            }
+          },
+          false
+        );
+
+        container.addEventListener(
+          'mousewheel',
+          event => {
+            if (event.deltaY < 0 && this.win.pageYOffset <= 0) {
+              this.disableScroll();
+            }
+          },
+          false
+        );
+
+        win.addEventListener(
+          'mousewheel',
+          event => {
+            if (win.pageYOffset <= 0 && wrapper.classList.contains(this.scrollClass) && event.deltaY < 0) {
+              this.disableScroll();
+            }
+          },
+          false
+        );
+
+        trigger.addEventListener(
+          'click',
+          event => {
+            event.preventDefault();
+
+            if (!wrapper.classList.contains(this.scrollClass) || win.pageYOffset > 1) {
+              this.enableScroll();
+            }
+          },
+          false
+        );
+      }
+
+      enableScroll() {
+        this.wrapper.classList.add(this.scrollClass);
+        this.isScrolling = true;
+
+        setTimeout(() => {
+          this.doc.body.style.overflow = 'visible';
+          this.isScrolling = false;
+
+          typeof this.afterScroll === 'function' && this.afterScroll(this);
+        }, this.duration);
+      }
+
+      disableScroll() {
+        if (this.isScrolling) {
+          return;
+        }
+
+        this.wrapper.classList.remove(this.scrollClass);
+        this.doc.body.style.overflow = 'hidden';
+      }
+    }
+  </script>
+
+  <script>
+    new IntroScroll();
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "introscroll",
+  "version": "0.0.0",
+  "description": "Fullscreen intro section ",
+  "main": "introscroll.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scriptex/IntroScroll.git"
+  },
+  "keywords": ["Intro", "Fullscreen", "Scroll", "Swipe"],
+  "author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://github.com/scriptex)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scriptex/IntroScroll/issues"
+  },
+  "homepage": "https://github.com/scriptex/IntroScroll#readme"
+}

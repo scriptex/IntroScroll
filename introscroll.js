@@ -1,5 +1,5 @@
 export default class IntroScroll {
-  constructor(settings) {
+  constructor(settings = {}) {
     this.settings = Object.assign(
       {},
       {
@@ -11,17 +11,17 @@ export default class IntroScroll {
         duration: 1500,
         afterScroll: null
       },
-      options
+      settings
     );
     this.win = window;
     this.doc = document;
-    this.element = this.getElement(settings.element);
-    this.wrapper = this.getElement(settings.wrapper);
-    this.container = this.getElement(settings.container);
-    this.trigger = this.getElement(settings.trigger);
-    this.scrollClass = settings.scrollClass;
-    this.duration = settings.duration;
-    this.afterScroll = settings.afterScroll;
+    this.element = this.getElement(this.settings.element);
+    this.wrapper = this.getElement(this.settings.wrapper);
+    this.container = this.getElement(this.settings.container);
+    this.trigger = this.getElement(this.settings.trigger);
+    this.scrollClass = this.settings.scrollClass;
+    this.duration = this.settings.duration;
+    this.afterScroll = this.settings.afterScroll;
     this.isScrolling = false;
 
     this.init();
