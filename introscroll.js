@@ -1,212 +1,182 @@
-;(function(window, document, undefined) {
-	var win = window;
-	var doc = document;
+const getElement = selector => document.querySelector(selector);
 
-	// Default settings
-	var defaults = {
-		element     : '#intro',
-		wrapper     : '#wrapper',
-		container   : '#container',
-		trigger     : '#intro__link',
-		scrollClass : 'is-scrolled',
-		duration    : 1500,
-		afterScroll : null
-	};
+const swipe = selector => {
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
 
-	/**
-	 * Merges default settings with user's
-	 * @private
-	 * @param  {Object} defaults         Default settings
-	 * @param  {Object} options          User options
-	 * @return {Object}                  Merged values of defaults and options
-	 */
-	function extend(defaults, options) {
-		var extended = {};
-		var prop;
+  const onSwipeUp = new Event('onswipeup');
+  const onSwipeRight = new Event('onswiperight');
+  const onSwipeDown = new Event('onswipedown');
+  const onSwipeLeft = new Event('onswipeleft');
+  const onTap = new Event('tap');
 
-		for ( prop in defaults ) {
-			if ( defaults.hasOwnProperty(prop) ) {
-				extended[prop] = defaults[prop];
-			};
-		};
+  element.addEventListener(
+    'touchstart',
+    event => {
+      touchstartX = event.changedTouches[0].screenX;
+      touchstartY = event.changedTouches[0].screenY;
+    },
+    false
+  );
 
-		for ( prop in options ) {
-			if ( options.hasOwnProperty(prop) ) {
-				extended[prop] = options[prop];
-			};
-		};
+  element.addEventListener(
+    'touchend',
+    event => {
+      touchendX = event.changedTouches[0].screenX;
+      touchendY = event.changedTouches[0].screenY;
 
-		return extended;
-	};
+      handleTouch();
+    },
+    false
+  );
 
-	/**
-	 * Makes a DOM query and returns a DOM element
-	 * @private 
-	 * @param  {String}                 Selector
-	 * @return {Object}                 DOM Element
-	 */
-	function getElement(element) {
-		return doc.querySelector(element);
-	};
+  const handleTouch = () => {
+    if (touchendX < touchstartX) {
+      element.dispatchEvent(onSwipeLeft);
+    }
 
-	/**
-	 * Creates custom events for touch gestures
-	 * @private
-	 * @param  {Object}   element       DOM element
-	 * @return {Void}
-	 */
-	function swipe(element) {
-		var touchstartX  = 0;
-		var touchstartY  = 0;
-		var touchendX    = 0;
-		var touchendY    = 0;
-		var onSwipeUp    = new Event('onswipeup');
-		var onSwipeRight = new Event('onswiperight');
-		var onSwipeDown  = new Event('onswipedown');
-		var onSwipeLeft  = new Event('onswipeleft');
-		var onTap        = new Event('tap');
+    if (touchendX > touchstartX) {
+      element.dispatchEvent(onSwipeRight);
+    }
 
-		element.addEventListener('touchstart', function(event) {
-		    touchstartX = event.changedTouches[0].screenX;
-		    touchstartY = event.changedTouches[0].screenY;
-		}, false);
+    if (touchendY < touchstartY) {
+      element.dispatchEvent(onSwipeUp);
+    }
 
-		element.addEventListener('touchend', function(event) {
-		    touchendX = event.changedTouches[0].screenX;
-		    touchendY = event.changedTouches[0].screenY;
+    if (touchendY > touchstartY) {
+      element.dispatchEvent(onSwipeDown);
+    }
 
-		    handleTouch();
-		}, false);
+    if (touchendY === touchstartY) {
+      element.dispatchEvent(onTap);
+    }
+  };
+};
 
-		function handleTouch() {
-		    if ( touchendX < touchstartX ) {
-		        element.dispatchEvent(onSwipeLeft);
-		    };
+export default class IntroScroll {
+  constructor(settings) {
+    this.settings = Object.assign(
+      {},
+      {
+        element: '#intro',
+        wrapper: '#wrapper',
+        container: '#container',
+        trigger: '#intro__link',
+        scrollClass: 'is-scrolled',
+        duration: 1500,
+        afterScroll: null
+      },
+      options
+    );
+    this.win = window;
+    this.doc = document;
+    this.element = getElement(settings.element);
+    this.wrapper = getElement(settings.wrapper);
+    this.container = getElement(settings.container);
+    this.trigger = getElement(settings.trigger);
+    this.scrollClass = settings.scrollClass;
+    this.duration = settings.duration;
+    this.afterScroll = settings.afterScroll;
+    this.isScrolling = false;
 
-		    if ( touchendX > touchstartX ) {
-		    	element.dispatchEvent(onSwipeRight);
-		    };
+    this.init();
+  }
 
-		    if ( touchendY < touchstartY ) {
-		    	element.dispatchEvent(onSwipeUp);
-		    };
+  init() {
+    this.bind();
+  }
 
-		    if ( touchendY > touchstartY ) {
-		    	element.dispatchEvent(onSwipeDown);
-		    };
+  bind() {
+    const win = this.win;
+    const trigger = this.trigger;
+    const element = this.element;
+    const wrapper = this.wrapper;
+    const container = this.container;
 
-		    if ( touchendY === touchstartY ) {
-		        element.dispatchEvent(onTap);
-		    };
-		};
-	};
+    swipe(element);
+    swipe(wrapper);
 
-	/**
-	 * Initializes IntroScroll constructor
-	 * @constructor
-	 * @param  {Object}                 Settings
-	 * @return {Void}                   IntroScroll instance
-	 */
-	function IntroScroll(options) {
-		var settings = extend(defaults, options);
+    element.addEventListener(
+      'mousewheel',
+      event => {
+        if (event.deltaY > 0) {
+          this.enableScroll();
+        }
+      },
+      false
+    );
 
-		this.element     = getElement(settings.element);
-		this.wrapper     = getElement(settings.wrapper);
-		this.container   = getElement(settings.container);
-		this.trigger     = getElement(settings.trigger);
-		this.scrollClass = settings.scrollClass;
-		this.duration    = settings.duration || 1500;
-		this.afterScroll = settings.afterScroll;
-		this.isScrolling = false;
+    element.addEventListener(
+      'onswipeup',
+      event => {
+        this.enableScroll();
+      },
+      false
+    );
 
-		this.init();
-	};
+    wrapper.addEventListener(
+      'onswipedown',
+      event => {
+        if (this.win.pageYOffset <= 0) {
+          this.disableScroll();
+        }
+      },
+      false
+    );
 
-	IntroScroll.prototype.init = function() {
-		this.bind();
-	};
+    container.addEventListener(
+      'mousewheel',
+      event => {
+        if (event.deltaY < 0 && this.win.pageYOffset <= 0) {
+          this.disableScroll();
+        }
+      },
+      false
+    );
 
-	IntroScroll.prototype.bind = function() {
-		var that = this;
-		
-		swipe(that.element);
-		swipe(that.wrapper);
+    win.addEventListener(
+      'mousewheel',
+      event => {
+        if (win.pageYOffset <= 0 && wrapper.classList.contains(this.scrollClass) && event.deltaY < 0) {
+          this.disableScroll();
+        }
+      },
+      false
+    );
 
-		that.element.addEventListener('mousewheel', function(event) {
-			if ( event.deltaY > 0 ) {
-				that.enableScroll();
-			};
-		}, false);
+    trigger.addEventListener(
+      'click',
+      event => {
+        event.preventDefault();
 
-		that.element.addEventListener('onswipeup', function(event) {
-			that.enableScroll();
-		});
+        if (!wrapper.classList.contains(this.scrollClass) || win.pageYOffset > 1) {
+          this.enableScroll();
+        }
+      },
+      false
+    );
+  }
 
-		that.wrapper.addEventListener('onswipedown', function(event) {
-			if ( win.pageYOffset === 0 ) {
-				that.disableScroll();
-			};
-		});
+  enableScroll() {
+    this.wrapper.classList.add(this.scrollClass);
+    this.isScrolling = true;
 
-		that.container.addEventListener('mousewheel', function(event) {
-			if ( event.deltaY < 0 && win.pageYOffset === 0 ) {
-				that.disableScroll();
-			};
-		}, false);
-		
-		win.addEventListener('mousewheel', function(event) {
-			if ( win.pageYOffset === 0 && that.wrapper.classList.contains(that.scrollClass) && event.deltaY < 0 ) {
-				that.disableScroll();
-			};
-		}, false);
+    setTimeout(() => {
+      this.doc.body.style.overflow = 'visible';
+      this.isScrolling = false;
 
-		that.trigger.addEventListener('click', function(event) {
-			event.preventDefault();
+      typeof this.afterScroll === 'function' && this.afterScroll(this);
+    }, this.duration);
+  }
 
-			if ( !that.wrapper.classList.contains(that.scrollClass) || win.pageYOffset > 1 )  {
-				that.enableScroll();
-			};
-		}, false);
-	};
-	
-	IntroScroll.prototype.enableScroll = function() {
-		var that = this;
+  disableScroll() {
+    if (this.isScrolling) {
+      return;
+    }
 
-		that.wrapper.classList.add(that.scrollClass);
-		
-		that.isScrolling = true;
-		
-		setTimeout(function() {
-			doc.body.style.overflow = 'visible';
-
-			that.isScrolling = false;
-
-			if ( typeof that.afterScroll === 'function' ) {
-				that.afterScroll(that);
-			};
-		}, that.duration);
-	};
-	
-	IntroScroll.prototype.disableScroll = function() {
-		if ( this.isScrolling ) {
-			return;
-		};
-
-		this.wrapper.classList.remove(this.scrollClass);
-
-		doc.body.style.overflow = 'hidden';
-	};
-
-	window.IntroScroll = IntroScroll;
-
-	// Example Initialization
-	// var introScroll = new IntroScroll({
-		// element     : '#intro',
-		// wrapper     : '#wrapper',
-		// container   : '#container',
-		// trigger     : '#intro__link',
-		// scrollClass : 'is-scrolled',
-		// duration    : 1500,
-		// afterScroll : null
-	// });
-})(window, document);
+    this.wrapper.classList.remove(this.scrollClass);
+    this.doc.body.style.overflow = 'hidden';
+  }
+}
