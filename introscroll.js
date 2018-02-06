@@ -141,7 +141,11 @@ export default class IntroScroll {
     win.addEventListener(
       'mousewheel',
       event => {
-        if (win.pageYOffset <= 0 && wrapper.classList.contains(this.scrollClass) && event.deltaY < 0) {
+        if (
+          win.pageYOffset <= 0 &&
+          wrapper.classList.contains(this.scrollClass) &&
+          event.deltaY < 0
+        ) {
           this.disableScroll();
         }
       },
@@ -153,7 +157,10 @@ export default class IntroScroll {
       event => {
         event.preventDefault();
 
-        if (!wrapper.classList.contains(this.scrollClass) || win.pageYOffset > 1) {
+        if (
+          !wrapper.classList.contains(this.scrollClass) ||
+          win.pageYOffset > 1
+        ) {
           this.enableScroll();
         }
       },
