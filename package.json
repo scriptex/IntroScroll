@@ -1,17 +1,31 @@
 {
   "name": "introscroll",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Fullscreen intro section ",
-  "main": "introscroll.js",
+  "main": "dist/introscroll.js",
+  "scripts": {
+    "build": "babel src -d dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scriptex/IntroScroll.git"
   },
-  "keywords": ["Intro", "Fullscreen", "Scroll", "Swipe"],
+  "keywords": [
+    "Intro",
+    "Fullscreen",
+    "Scroll",
+    "Swipe"
+  ],
   "author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://github.com/scriptex)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/scriptex/IntroScroll/issues"
   },
-  "homepage": "https://github.com/scriptex/IntroScroll#readme"
+  "homepage": "https://github.com/scriptex/IntroScroll#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-stage-2": "^7.0.0-beta.42"
+  }
 }
