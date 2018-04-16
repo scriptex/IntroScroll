@@ -18,7 +18,15 @@ or
 yarn add introscroll
 ```
 
-Then 
+or
+
+Just download this repository and link the files located in dist folder:
+
+```
+<script src="dist/introscroll.min.js"></script>
+```
+
+Then
 
 ```
 import IntroScroll from 'introscroll';
