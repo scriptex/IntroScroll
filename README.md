@@ -4,7 +4,9 @@ Create a fullscreen intro section and dismiss it in a single gesture.
 
 ## Description
 
-This library creates a fullscreen intro section and disables the default page scroll. The page scroll is being enabled again after a single mouse scroll, touch swipe up or any gesture that forces the page to move upwards.
+This library creates a fullscreen intro section and disables the default page scroll.
+
+The page scroll is being enabled again after a single mouse scroll, touch swipe up or any gesture that forces the page to move upwards.
 
 ## Install
 
@@ -55,3 +57,7 @@ const intro = new IntroScroll({
 ```
 
 For more details please see the [demo](./demo/).
+
+## LICENSE
+
+MIT

@@ -10,13 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/scriptex/IntroScroll.git"
   },
-  "keywords": [
-    "Intro",
-    "Fullscreen",
-    "Scroll",
-    "Swipe"
-  ],
-  "author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://github.com/scriptex)",
+  "keywords": ["Intro", "Fullscreen", "Scroll", "Swipe"],
+  "author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://atanas.info)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/scriptex/IntroScroll/issues"
