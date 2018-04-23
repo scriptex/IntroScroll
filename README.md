@@ -22,11 +22,7 @@ yarn add introscroll
 
 or
 
-Just download this repository and link the files located in dist folder:
-
-```
-<script src="dist/introscroll.min.js"></script>
-```
+Just download this repository and link the files located in dist folder.
 
 Then
 
