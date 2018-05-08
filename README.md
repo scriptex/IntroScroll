@@ -25,13 +25,13 @@ The page scroll is being enabled again after a single mouse scroll, touch swipe 
 
 ## Install
 
-```
+```console
 npm i introscroll
 ```
 
 or
 
-```
+```console
 yarn add introscroll
 ```
 
@@ -41,19 +41,19 @@ Just download this repository and link the files located in dist folder.
 
 Then
 
-```
+```javascript
 import IntroScroll from 'introscroll';
 ```
 
 and initialize an instance using default settings
 
-```
+```javascript
 const intro = new IntroScroll();
 ```
 
 or add your own settings
 
-```
+```javascript
 const intro = new IntroScroll({
   element: '#your-fullscreen-section',
   wrapper: '#your-fullscreen-sections-wrapper',
