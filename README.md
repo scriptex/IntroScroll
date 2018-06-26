@@ -4,6 +4,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/scriptex/IntroScroll.svg)](https://github.com/scriptex/IntroScroll/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/scriptex/IntroScroll.svg)](https://github.com/scriptex/IntroScroll/commits/master)
 [![Github file size](https://img.shields.io/github/size/scriptex/IntroScroll/dist/introscroll.min.js.svg)](https://github.com/scriptex/IntroScroll)
+[![Build Status](https://travis-ci.org/scriptex/IntroScroll.svg?branch=master)](https://travis-ci.org/scriptex/IntroScroll)
 [![npm](https://img.shields.io/npm/dt/introscroll.svg)](https://www.npmjs.com/package/introscroll)
 [![npm](https://img.shields.io/npm/v/introscroll.svg)](https://www.npmjs.com/package/introscroll)
 [![license](https://img.shields.io/github/license/scriptex/IntroScroll.svg)](https://github.com/scriptex/IntroScroll)
