@@ -11,8 +11,9 @@
 [![Analytics](https://ga-beacon.appspot.com/UA-83446952-1/github.com/scriptex/IntroScroll/README.md)](https://github.com/scriptex/IntroScroll/)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/scriptex/IntroScroll/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/scriptex/IntroScroll/graphs/commit-activity)
+[![Greenkeeper badge](https://badges.greenkeeper.io/scriptex/IntroScroll.svg)](https://greenkeeper.io/)
 
-[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/scriptex/) [![Greenkeeper badge](https://badges.greenkeeper.io/scriptex/IntroScroll.svg)](https://greenkeeper.io/)
+[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/scriptex/)
 
 # IntroScroll
 
