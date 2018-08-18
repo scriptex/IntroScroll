@@ -1,274 +1,183 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["IntroScroll"] = factory();
-	else
-		root["IntroScroll"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var IntroScroll =
-/*#__PURE__*/
-function () {
-  function IntroScroll() {
-    var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, IntroScroll);
-
-    this.settings = Object.assign({}, {
-      element: '#intro',
-      wrapper: '#wrapper',
-      container: '#container',
-      trigger: '#intro__link',
-      scrollClass: 'is-scrolled',
-      duration: 1500,
-      afterScroll: null
-    }, settings);
-    this.win = window;
-    this.doc = document;
-    this.element = this.getElement(this.settings.element);
-    this.wrapper = this.getElement(this.settings.wrapper);
-    this.container = this.getElement(this.settings.container);
-    this.trigger = this.getElement(this.settings.trigger);
-    this.scrollClass = this.settings.scrollClass;
-    this.duration = this.settings.duration;
-    this.afterScroll = this.settings.afterScroll;
-    this.isScrolling = false;
-    this.init();
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["exports"], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.introscroll = mod.exports;
   }
+})(this, function (_exports) {
+  "use strict";
 
-  _createClass(IntroScroll, [{
-    key: "init",
-    value: function init() {
-      this.bind();
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  var IntroScroll =
+  /*#__PURE__*/
+  function () {
+    function IntroScroll() {
+      var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      _classCallCheck(this, IntroScroll);
+
+      this.settings = Object.assign({}, {
+        element: '#intro',
+        wrapper: '#wrapper',
+        container: '#container',
+        trigger: '#intro__link',
+        scrollClass: 'is-scrolled',
+        duration: 1500,
+        afterScroll: null
+      }, settings);
+      this.win = window;
+      this.doc = document;
+      this.element = this.getElement(this.settings.element);
+      this.wrapper = this.getElement(this.settings.wrapper);
+      this.container = this.getElement(this.settings.container);
+      this.trigger = this.getElement(this.settings.trigger);
+      this.scrollClass = this.settings.scrollClass;
+      this.duration = this.settings.duration;
+      this.afterScroll = this.settings.afterScroll;
+      this.isScrolling = false;
+      this.init();
     }
-  }, {
-    key: "getElement",
-    value: function getElement(selector) {
-      return this.doc.querySelector(selector);
-    }
-  }, {
-    key: "swipe",
-    value: function swipe(element) {
-      var touchstartX = 0;
-      var touchstartY = 0;
-      var touchendX = 0;
-      var touchendY = 0;
-      var onSwipeUp = new Event('onswipeup');
-      var onSwipeRight = new Event('onswiperight');
-      var onSwipeDown = new Event('onswipedown');
-      var onSwipeLeft = new Event('onswipeleft');
-      var onTap = new Event('tap');
-      element.addEventListener('touchstart', function (event) {
-        touchstartX = event.changedTouches[0].screenX;
-        touchstartY = event.changedTouches[0].screenY;
-      }, false);
-      element.addEventListener('touchend', function (event) {
-        touchendX = event.changedTouches[0].screenX;
-        touchendY = event.changedTouches[0].screenY;
-        handleTouch();
-      }, false);
 
-      var handleTouch = function handleTouch() {
-        if (touchendX < touchstartX) {
-          element.dispatchEvent(onSwipeLeft);
-        }
-
-        if (touchendX > touchstartX) {
-          element.dispatchEvent(onSwipeRight);
-        }
-
-        if (touchendY < touchstartY) {
-          element.dispatchEvent(onSwipeUp);
-        }
-
-        if (touchendY > touchstartY) {
-          element.dispatchEvent(onSwipeDown);
-        }
-
-        if (touchendY === touchstartY) {
-          element.dispatchEvent(onTap);
-        }
-      };
-    }
-  }, {
-    key: "bind",
-    value: function bind() {
-      var _this = this;
-
-      var win = this.win;
-      var trigger = this.trigger;
-      var element = this.element;
-      var wrapper = this.wrapper;
-      var container = this.container;
-      this.swipe(element);
-      this.swipe(wrapper);
-      element.addEventListener('mousewheel', function (event) {
-        if (event.deltaY > 0) {
-          _this.enableScroll();
-        }
-      }, false);
-      element.addEventListener('onswipeup', function (event) {
-        _this.enableScroll();
-      }, false);
-      wrapper.addEventListener('onswipedown', function (event) {
-        if (_this.win.pageYOffset <= 0) {
-          _this.disableScroll();
-        }
-      }, false);
-      container.addEventListener('mousewheel', function (event) {
-        if (event.deltaY < 0 && _this.win.pageYOffset <= 0) {
-          _this.disableScroll();
-        }
-      }, false);
-      win.addEventListener('mousewheel', function (event) {
-        if (win.pageYOffset <= 0 && wrapper.classList.contains(_this.scrollClass) && event.deltaY < 0) {
-          _this.disableScroll();
-        }
-      }, false);
-      trigger.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        if (!wrapper.classList.contains(_this.scrollClass) || win.pageYOffset > 1) {
-          _this.enableScroll();
-        }
-      }, false);
-    }
-  }, {
-    key: "enableScroll",
-    value: function enableScroll() {
-      var _this2 = this;
-
-      this.wrapper.classList.add(this.scrollClass);
-      this.isScrolling = true;
-      setTimeout(function () {
-        _this2.doc.body.style.overflow = 'visible';
-        _this2.isScrolling = false;
-        typeof _this2.afterScroll === 'function' && _this2.afterScroll(_this2);
-      }, this.duration);
-    }
-  }, {
-    key: "disableScroll",
-    value: function disableScroll() {
-      if (this.isScrolling) {
-        return;
+    _createClass(IntroScroll, [{
+      key: "init",
+      value: function init() {
+        this.bind();
       }
+    }, {
+      key: "getElement",
+      value: function getElement(selector) {
+        return this.doc.querySelector(selector);
+      }
+    }, {
+      key: "swipe",
+      value: function swipe(element) {
+        var touchstartX = 0;
+        var touchstartY = 0;
+        var touchendX = 0;
+        var touchendY = 0;
+        var onSwipeUp = new Event('onswipeup');
+        var onSwipeRight = new Event('onswiperight');
+        var onSwipeDown = new Event('onswipedown');
+        var onSwipeLeft = new Event('onswipeleft');
+        var onTap = new Event('tap');
+        element.addEventListener('touchstart', function (event) {
+          touchstartX = event.changedTouches[0].screenX;
+          touchstartY = event.changedTouches[0].screenY;
+        }, false);
+        element.addEventListener('touchend', function (event) {
+          touchendX = event.changedTouches[0].screenX;
+          touchendY = event.changedTouches[0].screenY;
+          handleTouch();
+        }, false);
 
-      this.wrapper.classList.remove(this.scrollClass);
-      this.doc.body.style.overflow = 'hidden';
-    }
-  }]);
+        var handleTouch = function handleTouch() {
+          if (touchendX < touchstartX) {
+            element.dispatchEvent(onSwipeLeft);
+          }
 
-  return IntroScroll;
-}();
+          if (touchendX > touchstartX) {
+            element.dispatchEvent(onSwipeRight);
+          }
 
-exports.default = IntroScroll;
+          if (touchendY < touchstartY) {
+            element.dispatchEvent(onSwipeUp);
+          }
 
-/***/ })
-/******/ ])["default"];
+          if (touchendY > touchstartY) {
+            element.dispatchEvent(onSwipeDown);
+          }
+
+          if (touchendY === touchstartY) {
+            element.dispatchEvent(onTap);
+          }
+        };
+      }
+    }, {
+      key: "bind",
+      value: function bind() {
+        var _this = this;
+
+        var win = this.win;
+        var trigger = this.trigger;
+        var element = this.element;
+        var wrapper = this.wrapper;
+        var container = this.container;
+        this.swipe(element);
+        this.swipe(wrapper);
+        element.addEventListener('mousewheel', function (event) {
+          if (event.deltaY > 0) {
+            _this.enableScroll();
+          }
+        }, false);
+        element.addEventListener('onswipeup', function (event) {
+          _this.enableScroll();
+        }, false);
+        wrapper.addEventListener('onswipedown', function (event) {
+          if (_this.win.pageYOffset <= 0) {
+            _this.disableScroll();
+          }
+        }, false);
+        container.addEventListener('mousewheel', function (event) {
+          if (event.deltaY < 0 && _this.win.pageYOffset <= 0) {
+            _this.disableScroll();
+          }
+        }, false);
+        win.addEventListener('mousewheel', function (event) {
+          if (win.pageYOffset <= 0 && wrapper.classList.contains(_this.scrollClass) && event.deltaY < 0) {
+            _this.disableScroll();
+          }
+        }, false);
+        trigger.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          if (!wrapper.classList.contains(_this.scrollClass) || win.pageYOffset > 1) {
+            _this.enableScroll();
+          }
+        }, false);
+      }
+    }, {
+      key: "enableScroll",
+      value: function enableScroll() {
+        var _this2 = this;
+
+        this.wrapper.classList.add(this.scrollClass);
+        this.isScrolling = true;
+        setTimeout(function () {
+          _this2.doc.body.style.overflow = 'visible';
+          _this2.isScrolling = false;
+          typeof _this2.afterScroll === 'function' && _this2.afterScroll(_this2);
+        }, this.duration);
+      }
+    }, {
+      key: "disableScroll",
+      value: function disableScroll() {
+        if (this.isScrolling) {
+          return;
+        }
+
+        this.wrapper.classList.remove(this.scrollClass);
+        this.doc.body.style.overflow = 'hidden';
+      }
+    }]);
+
+    return IntroScroll;
+  }();
+
+  _exports.default = IntroScroll;
 });
