@@ -6,7 +6,6 @@
 [![npm](https://img.shields.io/npm/dt/introscroll.svg)](https://www.npmjs.com/package/introscroll)
 [![npm](https://img.shields.io/npm/v/introscroll.svg)](https://www.npmjs.com/package/introscroll)
 [![Analytics](https://ga-beacon.appspot.com/UA-83446952-1/github.com/scriptex/IntroScroll/README.md)](https://github.com/scriptex/IntroScroll/)
-[![Greenkeeper badge](https://badges.greenkeeper.io/scriptex/IntroScroll.svg)](https://greenkeeper.io/)
 
 # IntroScroll
 
