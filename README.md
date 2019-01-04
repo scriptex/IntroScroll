@@ -19,19 +19,25 @@ The page scroll is being enabled again after a single mouse scroll, touch swipe 
 
 ## Install
 
-```console
+```sh
 npm i introscroll
 ```
 
 or
 
-```console
+```sh
 yarn add introscroll
 ```
 
 or
 
-Just download this repository and link the files located in dist folder.
+just download this repository and link the files located in dist folder
+
+or include it from unpkg.com
+
+```html
+<script src="https://unpkg.com/introscroll"></script>
+```
 
 Then
 
