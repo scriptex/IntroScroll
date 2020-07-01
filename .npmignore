@@ -36,4 +36,5 @@ yarn.lock
 
 # Config files
 .babelrc
+.whitesource
 renovate.json
