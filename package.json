@@ -26,8 +26,8 @@
 	"homepage": "https://github.com/scriptex/IntroScroll#readme",
 	"devDependencies": {
 		"@babel/cli": "7.13.0",
-		"@babel/core": "7.13.1",
-		"@babel/preset-env": "7.13.5",
+		"@babel/core": "7.13.8",
+		"@babel/preset-env": "7.13.8",
 		"babel-loader": "8.2.2",
 		"babel-minify": "0.5.1"
 	}
