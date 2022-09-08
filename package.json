@@ -1,29 +1,34 @@
 {
 	"name": "introscroll",
-	"version": "1.1.0",
-	"description": "Fullscreen intro section ",
-	"main": "dist/introscroll.min.js",
-	"scripts": {
-		"dist": "babel src/introscroll.js --out-file dist/introscroll.js",
-		"minify": "babel src/introscroll.js --out-file dist/introscroll.min.js --presets minify,@babel/env",
-		"build": "npm run dist && npm run minify"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/scriptex/IntroScroll.git"
-	},
+	"version": "1.2.0",
+	"description": "Full screen intro section",
 	"keywords": [
 		"Intro",
 		"Fullscreen",
 		"Scroll",
 		"Swipe"
 	],
-	"author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://atanas.info)",
-	"license": "MIT",
+	"homepage": "https://introscroll.atanas.info",
 	"bugs": {
-		"url": "https://github.com/scriptex/IntroScroll/issues"
+		"url": "https://github.com/scriptex/IntroScroll/issues",
+		"email": "hi@atanas.info"
 	},
-	"homepage": "https://github.com/scriptex/IntroScroll#readme",
+	"license": "MIT",
+	"author": "Atanas Atanasov <hi@atanas.info> (https://atanas.info)",
+	"funding": "https://github.com/sponsors/scriptex",
+	"main": "dist/introscroll.min.js",
+	"repository": {
+		"type": "git",
+		"url": "github:scriptex/IntroScroll"
+	},
+	"scripts": {
+		"dist": "babel src/introscroll.js --out-file dist/introscroll.js",
+		"minify": "babel src/introscroll.js --out-file dist/introscroll.min.js --presets minify,@babel/env",
+		"build": "yarn dist && yarn minify",
+		"copy": "cp dist/introscroll.js demo/introscroll.js",
+		"deploy": "yarn build && yarn copy"
+	},
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/cli": "7.18.10",
 		"@babel/core": "7.19.0",

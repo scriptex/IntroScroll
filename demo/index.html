@@ -1,52 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+		/>
 
-  <title>IntroScroll Demo</title>
+		<title>IntroScroll Demo</title>
 
-  <style type="text/css" media="screen">
-    html,
-    body { height: 100%; }
+		<style type="text/css" media="screen">
+			html,
+			body {
+				height: 100%;
+			}
 
-    body { font-family: sans-serif; margin: 0; overflow: hidden; }
+			body {
+				font-family: sans-serif;
+				margin: 0;
+				overflow: hidden;
+			}
 
-    .intro,
-    .wrapper,
-    .section,
-    .container { height: 100%; }
+			.intro,
+			.wrapper,
+			.section,
+			.container {
+				height: 100%;
+			}
 
-    .intro,
-    .section { display: flex; align-items: center; justify-content: center; }
+			.intro,
+			.section {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 
-    .intro { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 99; transform: translateY(0%) scale(1); transition: transform 1.5s ease-in-out; background-color: #fff; }
-    .intro__link { position: absolute; bottom: 1em; left: 50%; transform: translateX(-50%); }
+			.intro {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 99;
+				transform: translateY(0%) scale(1);
+				transition: transform 1.5s ease-in-out;
+				background-color: #fff;
+			}
+			.intro__link {
+				position: absolute;
+				bottom: 1em;
+				left: 50%;
+				transform: translateX(-50%);
+			}
 
-    .is-scrolled .intro { transform: translateY(-100%) scale(0.8); }
-  </style>
-</head>
-<body>
-  <div class="wrapper" id="wrapper">
-    <div class="intro" id="intro">
-      <div class="intro-inner">INTRO</div>
+			.is-scrolled .intro {
+				transform: translateY(-100%) scale(0.8);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper" id="wrapper">
+			<div class="intro" id="intro">
+				<div class="intro-inner">INTRO</div>
 
-      <a href="#" class="intro__link" id="intro__link">Scroll Down</a>
-    </div>
+				<a href="#" class="intro__link" id="intro__link">Scroll Down</a>
+			</div>
 
-    <div class="container" id="container">
-      <section class="section" style="background-color: gray">Gray Section</section><!-- /.section -->
+			<div class="container" id="container">
+				<section class="section" style="background-color: gray">Gray Section</section>
+				<!-- /.section -->
 
-      <section class="section" style="background-color: lime">Lime Section</section><!-- /.section -->
+				<section class="section" style="background-color: lime">Lime Section</section>
+				<!-- /.section -->
 
-      <section class="section" style="background-color: lavender">Lavender Section</section><!-- /.section -->
-    </div>
-  </div>
+				<section class="section" style="background-color: lavender">Lavender Section</section>
+				<!-- /.section -->
+			</div>
+		</div>
 
-  <script src="../dist/introscroll.js"></script>
+		<script src="./introscroll.js"></script>
 
-  <script>
-    new IntroScroll();
-  </script>
-</body>
+		<script>
+			new IntroScroll();
+		</script>
+	</body>
 </html>
