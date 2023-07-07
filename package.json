@@ -33,7 +33,7 @@
 		"@babel/cli": "7.22.6",
 		"@babel/core": "7.22.8",
 		"@babel/preset-env": "7.22.7",
-		"babel-loader": "9.1.2",
+		"babel-loader": "9.1.3",
 		"babel-minify": "0.5.2"
 	}
 }
